@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+if os.path.exists('env.py'):
+    import env
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,9 +42,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     'home',
     'recipes',
+
+    'djrichtextfield',
 ]
+
+
+SITE_ID = 1
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +73,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -74,6 +88,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'recipeBlog.wsgi.application'
+
+
+AUTHENTICATION_BACKENDS = [
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
 
 
 # Database
@@ -118,12 +143,47 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
+# Account Setup
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_VERIFCATION = 'none'
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 
-STATIC_URL = 'static/'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/images/'
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Dj Rich Text Field Configuration
+DJRICHTEXTFIELD_CONFIG = {
+    'js': ['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
+    'init_template': 'djrichtextfield/init/ckeditor.js',
+    'settings': {
+        'toolbar': [
+            ['Format', 'Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'], ['Undo', 'Redo'],
+            ['Maximize']
+        ],
+        'format_tags': 'p;h1;h2;h3'
+    }
+}
