@@ -18,10 +18,12 @@
               <li class="nav-item">
                 <a class="nav-link {% if url_name == 'recipes' %}active{% endif %}" href="{% url 'recipes' %}">Recipes</a>
               </li>
+
+              {% if request.user.is_authenticated %}
+
               <li class="nav-item">
                 <a class="nav-link {% if url_name == 'add_recipe' %}active{% endif %}" href="{% url 'add_recipe' %}">New</a>
               </li>
-              {% if request.user.is_authenticated %}
 
               <li class="nav-item">
                 <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}" href="/accounts/logout/">Logout</a>

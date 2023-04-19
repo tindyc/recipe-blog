@@ -42,6 +42,10 @@ main {
     margin-top: 1rem;
 }
 
+.card-img-top {
+    height: 15em;
+}
+
 .recipes {
     text-decoration: none;
     color: var(--black);
