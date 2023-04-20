@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     'home',
     'recipes',
+    'profiles',
 
     'crispy_forms',
     'crispy_bootstrap5',
