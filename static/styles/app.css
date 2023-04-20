@@ -63,6 +63,9 @@ a:hover {
     height: 10em;
 }
 
+textarea {
+    height: 50px;
+}
 
 /* Form */
 
