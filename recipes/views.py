@@ -12,8 +12,8 @@ from django.db.models import Q
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Recipe
-from .forms import RecipeForm
+from .models import Recipe, Comment
+from .forms import RecipeForm, NewCommentForm
 
 
 class Recipes(ListView):
@@ -43,6 +43,25 @@ class RecipeDetail(DetailView):
     template_name = "recipes/recipe_detail.html"
     model = Recipe
     context_object_name = "recipe"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        comments_connected = Comment.objects.filter(
+            recipe_connected=self.get_object()).order_by('-date_posted')
+        data['comments'] = comments_connected
+        if self.request.user.is_authenticated:
+            data['comment_form'] = NewCommentForm(instance=self.request.user)
+
+        return data
+
+
+    def post(self, request, *args, **kwargs):
+        new_comment = Comment(content=request.POST.get('content'),
+                                  author=self.request.user,
+                                  recipe_connected=self.get_object())
+        new_comment.save()
+        return self.get(self, request, *args, **kwargs)
 
 
 class AddRecipe(LoginRequiredMixin, CreateView):

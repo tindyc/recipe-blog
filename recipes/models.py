@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from djrichtextfield.models import RichTextField
 from django_resized import ResizedImageField
@@ -51,8 +52,24 @@ class Recipe(models.Model):
     calories = models.IntegerField()
     posted_date = models.DateTimeField(auto_now=True)
 
+    @property
+    def number_of_comments(self):
+        return Comment.objects.filter(recipe_connected=self).count()
+
+
     class Meta:
         ordering = ["-posted_date"]
 
     def __str__(self):
         return str(self.title)
+
+
+class Comment(models.Model):
+    recipe_connected = models.ForeignKey(
+        Recipe, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = RichTextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return str(self.author) + ', ' + self.recipe_connected.title[:40]

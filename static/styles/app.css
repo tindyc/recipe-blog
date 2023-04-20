@@ -1,28 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Basic:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;700&family=Playfair+Display+SC:wght@900&display=swap');
 
-:root {
-    /** Fonts */
-    --title: 'EB Garamond', serif;
-    --main-font: 'Roboto', serif;
+a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 100);
 }
 
-html, body {
-    height: 100%;
+a:hover {
+    color: rgba(0, 0, 0, 0.9);
 }
 
-body {
+.recipe-details {
+    flex-wrap: wrap;
+}
+
+.recipe-img{
     display: flex;
-    flex-direction: column;
-    font-family: var(--main-font);
+    justify-content: center;
+    padding: 2%;
+}
+.big-header-text {
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 900;
+    font-size: 5rem;
+    color: rgba(0, 0, 10, 0.90);
+    text-transform: uppercase;
+    text-align: center;
+
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--title);
+.recipe-headings{
+    font-weight: 900;
+    font-size: 2rem;
+    color: rgba(0, 0, 10, 0.90);
+    text-transform: uppercase;
+    text-align: center;
 }
 
-main {
-    flex: 1 0 auto;
-    background-color: var(--white);
+.text-center{
+    text-align: center;
+}
+
+.recipeinfo{
+    text-align: center;
+    width: 50%;
+
+}
+
+/* Recipe cards */
+
+.card {
+    height: 90%;
+    margin-top: 1rem;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15em;
+    object-fit: cover;
+}
+
+.card-body {
+    height: 10em;
 }
 
 
@@ -35,183 +73,14 @@ main {
     border-radius: 5px;
 }
 
-/* Recipes */
-
-.card {
-    height: 90%;
-    margin-top: 1rem;
-}
-
-.card-img-top {
-    height: 15em;
-}
-
-.recipes {
-    text-decoration: none;
-    color: var(--black);
-}
-
-.recipes:hover {
-    cursor: pointer;
-}
-
-.recipe-info {
+/* Footer */
+footer {
+    flex-shrink: 0;
+    background-color: var(--off-white);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.recipe-container {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-  }
-
-
-.recipe-img {
-    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-}
-
-.recipe-pic {
-    width: 100%;
-    height: auto;
-}
-
-.recipe-cont {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-a.img-container {
-    position: relative;
-    text-align: center;
-    color: var(--white);
-    margin: 2%;
-    overflow: hidden;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    box-shadow: var(--smal-box-shadow);
-}
-
-a.img-container:hover {
-    color: var(--orange);
-}
-
-.img-container img {
-    width: 100%;
-    height: auto;
-}
-
-.centered {
-    width: 100%;
-    background-color: #000000c9;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* Profiles */
-
-.profile-img {
-    width: 280px;
-    margin: 0 auto;
-}
-
-.profile-img img {
-    border-radius: 8px;
+    border-top: var(--border);
     width: 100%;
 }
-
-.profile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.info {
-    width: 100%;
-    text-align: center;
-}
-
-.profile-recipes {
-    width: 100%;
-}
-
-@media screen and (min-width:40em){
-    .form {
-        width: 50%;
-    }
-
-    .recipe-cont {
-        flex-direction: row;
-    }
-
-    .img-container {
-        flex-direction: row;
-        width: 29%;
-    }
-}
-
-@media screen and (min-width: 62.5em) {
-    .main-title {
-        width: 50%;
-    }
-    
-    .recipe-info {
-        flex-direction: row;
-        border: 1px solid var(--black);
-    }
-
-    .recipe-img {
-        width: 40%;
-        margin: 0 auto;
-    }
-
-    .recipe-detail {
-        width: 60%;
-        padding: 2rem;
-    }
-
-    .recipe-container {
-        flex-direction: row;
-    }
-
-    .ingredients {
-        width: 33.33%;
-    }
-
-    .instructions {
-        width: 66.66%;
-    }
-
-    .profile {
-        flex-direction: row;
-    }
-
-    .info {
-        width: 30%;
-    }
-
-    .profile-recipes {
-        width: 70%;
-        padding: 1.5rem 3rem;
-    }
-
-    .profile-recipes a {
-        text-decoration: none;
-    }
-}
-
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: red;
-    color: white;
-    text-align: center;
-  }
