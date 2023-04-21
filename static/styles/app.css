@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Gentium+Basic:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;700&family=Playfair+Display+SC:wght@900&display=swap');
 
+
 body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     width: 100%;
 }
+
 a {
     text-decoration: none;
     color: rgba(0, 0, 0, 100);
@@ -15,46 +17,6 @@ a:hover {
     color: rgba(0, 0, 0, 0.9);
 }
 
-.nav{
-    width: 100%;
-}
-.recipe-details {
-    flex-wrap: wrap;
-}
-
-.big-header-text {
-    font-family: 'Playfair Display SC', serif;
-    font-weight: 900;
-    font-size: 5rem;
-    color: rgba(0, 0, 10, 0.90);
-    text-transform: uppercase;
-    text-align: center;
-
-}
-
-.recipe-headings{
-    font-weight: 900;
-    font-size: 2rem;
-    color: rgba(0, 0, 10, 0.90);
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.text-center{
-    text-align: center;
-}
-
-.recipeinfo{
-    text-align: center;
-    width: 50%;
-
-}
-
-.instructions{
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 5%;
-}
 
 /* Recipe cards */
 
@@ -82,6 +44,7 @@ a:hover {
 
 textarea {
     height: 50px;
+    max-width: 100%;
 }
 
 /* Form */
@@ -164,33 +127,68 @@ footer{
     
   }
 
-@media screen and (max-width: 400px) {
-    img.recipeImg {
-         width: 300px;
-         padding-left: 10%;
-         padding-bottom: 10%;
+
+  /* Recipe details */
+  
+  /* Header/Blog Title */
+  .recipe-header {
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background: white;
+  }
+  
+  /* Create two unequal columns that floats next to each other */
+  /* Left column */
+  .leftcolumn {
+    float: left;
+    width: 50%;
+    padding-left: 10%;
+  }
+  
+  /* Right column */
+  .rightcolumn {
+    float: left;
+    width: 40%;
+    padding-left: 10%;
+
+  }
+
+  .recipeInfo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+
+  }
+  
+  /* Recipe image */
+
+  img.recipeImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Add a card effect for articles */
+  .recipe-card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  
+  /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+      width: 100%;
+      padding: 0;
     }
-
-    .big-header-text{
-        font-size: 3em;
-    }
-}
-
-/* ----------- iPad 1, 2, Mini and Air ----------- */
-
-/* Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 1) {
-
-    img.recipeImg {
-        text-align: center;
-        padding-left: 20%;
-        padding-bottom: 10%;
-   }
-
-   .big-header-text{
-       font-size: 3em;
-   }
-}
+  }

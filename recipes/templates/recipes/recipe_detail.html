@@ -4,98 +4,84 @@
 
 {% block content %} 
 
+<div class="recipe-header">
+  <h2>{{ recipe.title }}</h2>
+  <h6>Posted by {{recipe.user}} on {{recipe.posted_date}}</h6>
+  <h6><strong>Cuisine: </strong> {{ recipe.cuisine_types|title }} | <strong>Calories: </strong> {{ recipe.calories }} | <strong>Cooking Time: </strong> {{ recipe.cookingtime }}</h6>
+  <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-outline-primary">Edit</a>
+  <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-outline-primary">Delete</a>
+</div>
 
-    <div class="container-fluid recipe-details">
+<div class="row">
+  <div class="leftcolumn">
 
-    <div class="container">
-        <h1 class="big-header-text">{{ recipe.title }}</h1>
-        <h6 class="text-center">Posted by {{recipe.user}} on {{recipe.posted_date}}</h6>
-
-        {% if request.user == recipe.user %} 
-        <br>
-        <div class="text-center">
-            <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-outline-primary">Edit</a>
-            <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-outline-primary">Delete</a>
-        </div>
-        {% endif %}
+    <div class="recipe-card">
+      <img class="recipeImg" src="{{ recipe.image.url }}" alt="{{recipe.image_alt}}">
     </div>
 
-    <br>
-      <div class="text-center">
-        <p><strong>Cuisine: </strong> {{ recipe.cuisine_types|title }} | <strong>Calories: </strong> {{ recipe.calories }}</p>
-      </div>
-
-      <br>
-
-      <div class="container mx-auto">
-        <div class="row">
-            <div class="col-lg-6 recipe-img justify-content-center">
-              <img class="recipeImg" src="{{ recipe.image.url }}" alt="{{recipe.image_alt}}">
-            </div>
-  
-            <div class="col-lg-6 ingredients justify-content-center">
-              <h2 class="recipe-headings">Ingredients</h2>
-              <p>{{ recipe.ingredients|safe }}</p>
-            </div>
-        </div>
+    <div class="recipe-card">
+      <h2>Instructions</h2>
+      <p>{{ recipe.instructions|safe }}</p>
     </div>
 
-      <div class="container instructions">
-            <h2 class="recipe-headings">Instructions</h2>
-            <p>{{ recipe.instructions|safe }}</p>
-      </div>
-      
-        <div class="container text-center">
-          <div class="row">
-            <h2 class="recipe-headings">Leave your comment :</h2>
-            <div id="comments_section">
-
-              {% if user.is_authenticated %}
-              <form method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                  {{ comment_form }}
-                  <br>
-                  <button class="btn btn-primary" type="submit">Add comment <i class="fas fa-comments"></i></button>
-                </div>
-              </form>
-              {% else %}
-              <a class="btn btn-primary comment-btn" href="{% url 'account_login' %}?next={{request.path}}">Log in to add a comment!</a><br>
-              {% endif %}
-
-              {% if comments %}
-              <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong>
-              <hr>
-              <ul>
-                {% for comment in comments %}         
-                <div>
-                    <span>
-                      <strong class="text-info">{{ comment.author }} </strong>
-                      <small class="text-muted">{{ comment.date_posted }}</small>
-                    </span>
-                    <p>
-                      {{ comment.content|safe }}
-                    </p>
-                  </div>
-              
-                {% endfor %}
-              </ul>
-              {% else %}
-              <br>
-                <strong class="text-secondary">No comments yet...</strong>
-              <br>
-              {% endif %}
-
-            </div>
+    <div class="recipe-card">
+      <h2>Leave your comment :</h2>
+        {% if user.is_authenticated %}
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            {{ comment_form }}
+            <br>
+            <button class="btn btn-primary" type="submit">Add comment <i class="fas fa-comments"></i></button>
           </div>
-        </div>
+        </form>
+        {% else %}
+        <a class="btn btn-primary comment-btn" href="{% url 'account_login' %}?next={{request.path}}">Log in to add a comment!</a><br>
+        {% endif %}
 
+        {% if comments %}
+        <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong>
+        <hr>
+        <ul>
+          {% for comment in comments %}         
+          <div>
+              <span>
+                <strong class="text-info">{{ comment.author }} </strong>
+                <small class="text-muted">{{ comment.date_posted }}</small>
+              </span>
+              <p>
+                {{ comment.content|safe }}
+              </p>
+            </div>
+        
+          {% endfor %}
+        </ul>
+        {% else %}
+        <br>
+          <strong class="text-secondary">No comments yet...</strong>
+        <br>
+        {% endif %}
 
-
-
+      </div>
     </div>
 
-     
+  <div class="rightcolumn">
+
+    <div class="recipe-card">
+      <h2>Ingredients</h2>
+      <p>{{ recipe.ingredients|safe }}</p>
+    </div>
+
+    <div class="recipe-card">
+      <h2>Notes</h2>
+      <p>{{ recipe.notes|safe }}</p>
+    </div>
+
+  </div>
+
+</div>
+
+
 
     
 {% endblock %}

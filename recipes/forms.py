@@ -11,8 +11,10 @@ class RecipeForm(forms.ModelForm):
         fields = [
             "title",
             "description",
+            "cookingtime",
             "ingredients",
             "instructions",
+            "notes",
             "image",
             "image_alt",
             "meal_type",
@@ -22,6 +24,7 @@ class RecipeForm(forms.ModelForm):
 
         ingredients = forms.CharField(widget=RichTextWidget())
         instructions = forms.CharField(widget=RichTextWidget())
+        notes = forms.CharField(widget=RichTextWidget())
 
         widget = {
             "description": forms.Textarea(attrs={"rows": 5}),
@@ -30,8 +33,10 @@ class RecipeForm(forms.ModelForm):
         labels = {
             "title": "Recipe Title",
             "description": "Description",
+            "cookingtime": "Cooking Time",
             "ingredients": "Recipe Ingredients",
             "instructions": "Recipe Instructions",
+            "notes": "Recipe Notes",
             "image": "Recipe Image",
             "image_alt": "Describe Image",
             "meal_type": "Meal Type",
