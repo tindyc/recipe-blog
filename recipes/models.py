@@ -37,7 +37,7 @@ class Recipe(models.Model):
     cookingtime = models.CharField(max_length=500, null=False, blank=False)
     instructions = RichTextField(max_length=10000, null=False, blank=False)
     ingredients = RichTextField(max_length=10000, null=False, blank=False)
-    notes = RichTextField(max_length=10000, null=False, blank=False)
+    notes = RichTextField(max_length=10000, null=True, blank=True)
     image = ResizedImageField(
         size=[400, None],
         quality=75,
