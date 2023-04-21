@@ -12,6 +12,7 @@
         <h6 class="text-center">Posted by {{recipe.user}} on {{recipe.posted_date}}</h6>
 
         {% if request.user == recipe.user %} 
+        <br>
         <div class="text-center">
             <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-outline-primary">Edit</a>
             <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-outline-primary">Delete</a>
@@ -24,21 +25,24 @@
         <p><strong>Cuisine: </strong> {{ recipe.cuisine_types|title }} | <strong>Calories: </strong> {{ recipe.calories }}</p>
       </div>
 
-      <div class="recipe-img">
-            <img src="{{ recipe.image.url }}" alt="{{recipe.image_alt}}">
-      </div>
-      
-      <div class="container recipeinfo">
+      <br>
+
+      <div class="container mx-auto">
         <div class="row">
-          <div class="col mx-n*">
-            <h2 class="recipe-headings">Ingredients</h2>
-            <p>{{ recipe.ingredients|safe }}</p>
-          </div>
-          <div class="col px-*">
+            <div class="col-lg-6 recipe-img justify-content-center">
+              <img class="recipeImg" src="{{ recipe.image.url }}" alt="{{recipe.image_alt}}">
+            </div>
+  
+            <div class="col-lg-6 ingredients justify-content-center">
+              <h2 class="recipe-headings">Ingredients</h2>
+              <p>{{ recipe.ingredients|safe }}</p>
+            </div>
+        </div>
+    </div>
+
+      <div class="container instructions">
             <h2 class="recipe-headings">Instructions</h2>
             <p>{{ recipe.instructions|safe }}</p>
-          </div>
-        </div>
       </div>
       
         <div class="container text-center">

@@ -4,6 +4,16 @@
 {% block title %}Profile - {{profile.user.username}}{% endblock %}
 
 {% block content %}
+
+ <!-- Form for search bar -->
+ <div class="searchbar">
+    <form class="d-flex" role="search" method="GET" action="{% url 'recipes' %}">
+        <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+</div>
+
+
 <div class="container p-4">
     <div class="profile">
         <div class="info">
@@ -25,7 +35,12 @@
             <button id="myBtn" class="btn btn-primary w-25 mb-4">Edit</button>
             {% endif %}
         </div>
+        
         <div class="profile-recipes">
+            <div class="container text-center">
+                <a href="{% url 'add_recipe' %}" class="btn btn-outline-primary">Add new recipe</a>
+            </div>
+            <br>
             <h2 class="text-center pb-4">Latest Recipes</h2>
             {% for recipe in profile.user.recipe_owner.all %}
             <a href="{% url 'recipe_detail' recipe.id %}">
@@ -34,6 +49,7 @@
             {{ recipe.posted_date }}
             <hr>
             {% endfor %}
+            
         </div>
     </div>
     <!-- The Modal -->
