@@ -1,1 +1,1 @@
-web: gunicorn 'recipeBlog.wsgi'
+web: python manage.py migrate && gunicorn recipeBlog.wsgi
