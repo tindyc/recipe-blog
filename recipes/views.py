@@ -10,10 +10,20 @@ from django.contrib.auth.mixins import (
 
 from django.db.models import Q
 
-from django.contrib.auth.mixins import LoginRequiredMixin
-
 from .models import Recipe, Comment
 from .forms import RecipeForm, NewCommentForm
+
+
+class Home(ListView):
+    """View latest recipes"""
+
+    template_name = "recipes/index.html"
+    model = Recipe
+    context_object_name = "recipes"
+
+    def get_queryset(self, **kwargs):
+        recipes = self.model.objects.all()[:1]
+        return recipes
 
 
 class Recipes(ListView):

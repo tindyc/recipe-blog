@@ -1,12 +1,13 @@
 from django.urls import path
 from .views import (
-    AddRecipe, Recipes,
+    Home, AddRecipe, Recipes,
     RecipeDetail, DeleteRecipe,
     EditRecipe
 )
 
 
 urlpatterns = [
+    path("", Home.as_view(), name="home"),
     path("add_recipe/", AddRecipe.as_view(), name="add_recipe"),
     path("recipes/", Recipes.as_view(), name="recipes"),
     path("<slug:pk>/", RecipeDetail.as_view(), name="recipe_detail"),

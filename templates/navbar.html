@@ -3,9 +3,9 @@
 <header>
 {% with request.resolver_match.url_name as url_name %}
 
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+<nav class="navbar fixed-top navbar-expand-lg bg-light navbar-light">
   <div class="container">
-      <a href="{% url 'home' %}" class="navbar-brand">Recipe Blog</a>
+      <a href="{% url 'home'%}" class="navbar-brand">Recipe Blog</a>
   
       <button
           class="navbar-toggler"

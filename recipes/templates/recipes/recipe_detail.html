@@ -4,12 +4,18 @@
 
 {% block content %} 
 
+<br>
+<br>
+<br>
+<br>
 <div class="recipe-header">
   <h2>{{ recipe.title }}</h2>
   <h6>Posted by {{recipe.user}} on {{recipe.posted_date}}</h6>
   <h6><strong>Cuisine: </strong> {{ recipe.cuisine_types|title }} | <strong>Calories: </strong> {{ recipe.calories }} | <strong>Cooking Time: </strong> {{ recipe.cookingtime }}</h6>
+  {% if user.is_authenticated %}
   <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-outline-primary">Edit</a>
   <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-outline-primary">Delete</a>
+  {% endif %}
 </div>
 
 <div class="row">
@@ -66,7 +72,7 @@
     </div>
 
   <div class="rightcolumn">
-
+    
     <div class="recipe-card">
       <h2>Ingredients</h2>
       <p>{{ recipe.ingredients|safe }}</p>
