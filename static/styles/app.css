@@ -259,7 +259,7 @@ textarea {
 
   .item {
     min-width: 80%;
-    height: 14vh; 
+    height: 25vh; 
     writing-mode: horizontal-tb;
     letter-spacing: initial;
     align-items: center;
