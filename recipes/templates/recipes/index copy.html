@@ -1,0 +1,93 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+<section class="et-hero-tabs">
+
+  <div class="home-container">
+
+      <div class="item breakfast">
+        <a href="{% url 'recipes' %}"><span class="item__text">Breakfast</span></a>
+      </div>
+      <div class="item lunch">
+          <a href="{% url 'recipes' %}"><span class="item__text">Lunch</span></a>
+      </div>
+      <div class="item dinner">
+          <a href="{% url 'recipes' %}"><span class="item__text">Dinner</span></a>
+      </div>
+    
+    </div>
+
+  <div class="et-hero-tabs-container">
+    <a class="et-hero-tab" href="#tab-about">About me</a>
+    <a class="et-hero-tab" href="#tab-recipe">Latest Recipe</a>
+    <a class="et-hero-tab" href="#tab-contact">Contact</a>
+    <span class="et-hero-tab-slider"></span>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-about">
+  <div class="about-container">
+    <h1>About me</h1>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-recipe">
+  <div class="container">
+    {% for recipe in recipes %} 
+  <div class="recipe-header">
+    <h2>{{ recipe.title }}</h2>
+    <h6>Posted by {{recipe.user}} on {{recipe.posted_date}}</h6>
+    <h6><strong>Cuisine: </strong> {{ recipe.cuisine_types|title }} | <strong>Calories: </strong> {{ recipe.calories }} | <strong>Cooking Time: </strong> {{ recipe.cookingtime }}</h6>
+    {% if user.is_authenticated %}
+    <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-outline-primary">Edit</a>
+    <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-outline-primary">Delete</a>
+    {% endif %}
+  </div>
+  
+  <div class="row">
+    <div class="leftcolumn">
+  
+      <div class="recipe-card">
+        <img class="recipeImg" src="{{ recipe.image.url }}" alt="{{recipe.image_alt}}">
+      </div>
+  
+      <div class="recipe-card">
+        <h2>Instructions</h2>
+        <p>{{ recipe.instructions|safe }}</p>
+      </div>
+
+      </div>
+  
+    <div class="rightcolumn">
+      
+      <div class="recipe-card">
+        <h2>Ingredients</h2>
+        <p>{{ recipe.ingredients|safe }}</p>
+      </div>
+  
+      <div class="recipe-card">
+        <h2>Notes</h2>
+        <p>{{ recipe.notes|safe }}</p>
+      </div>
+  
+    </div>
+  
+  </div>
+  {% endfor %}
+  </div>
+</section>
+
+<section class="tab-content" id="tab-contact">
+  <div class="container">
+    <h1>Contact Form</h1>
+    <h2>blah blah blah</h2>
+  </div>
+</section>
+
+
+
+
+
+{% endblock %}

@@ -22,7 +22,7 @@ class Home(ListView):
     context_object_name = "recipes"
 
     def get_queryset(self, **kwargs):
-        recipes = self.model.objects.all()[:1]
+        recipes = self.model.objects.all()[:5]
         return recipes
 
 
