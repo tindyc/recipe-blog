@@ -207,3 +207,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Cloudinary Settings
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUIDNARY_URL = os.environ.get('CLOUDINARY_URL')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION = "none"
