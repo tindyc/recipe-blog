@@ -20,7 +20,6 @@
 
 <div class="row">
   <div class="leftcolumn">
-
     <div class="recipe-card">
       <img class="recipeImg" src="{{ recipe.image.url }}" alt="{{recipe.image_alt}}">
     </div>
@@ -29,50 +28,11 @@
       <h2>Instructions</h2>
       <p>{{ recipe.instructions|safe }}</p>
     </div>
-
-    <div class="recipe-card">
-      <h2>Leave your comment :</h2>
-        {% if user.is_authenticated %}
-        <form method="POST">
-          {% csrf_token %}
-          <div class="form-group">
-            {{ comment_form }}
-            <br>
-            <button class="btn btn-primary" type="submit">Add comment <i class="fas fa-comments"></i></button>
-          </div>
-        </form>
-        {% else %}
-        <a class="btn btn-primary comment-btn" href="{% url 'account_login' %}?next={{request.path}}">Log in to add a comment!</a><br>
-        {% endif %}
-
-        {% if comments %}
-        <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong>
-        <hr>
-        <ul>
-          {% for comment in comments %}         
-          <div>
-              <span>
-                <strong class="text-info">{{ comment.author }} </strong>
-                <small class="text-muted">{{ comment.date_posted }}</small>
-              </span>
-              <p>
-                {{ comment.content|safe }}
-              </p>
-            </div>
-        
-          {% endfor %}
-        </ul>
-        {% else %}
-        <br>
-          <strong class="text-secondary">No comments yet...</strong>
-        <br>
-        {% endif %}
-
-      </div>
+   
     </div>
 
   <div class="rightcolumn">
-    
+
     <div class="recipe-card">
       <h2>Ingredients</h2>
       <p>{{ recipe.ingredients|safe }}</p>
@@ -84,6 +44,48 @@
     </div>
 
   </div>
+</div>
+
+<div class="col d-flex justify-content-center">
+  <div class="recipe-card">
+    <h2>Leave your comment :</h2>
+      {% if user.is_authenticated %}
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ comment_form }}
+          <br>
+          <button class="btn btn-primary" type="submit">Add comment <i class="fas fa-comments"></i></button>
+        </div>
+      </form>
+      {% else %}
+      <a class="btn btn-primary comment-btn" href="{% url 'account_login' %}?next={{request.path}}">Log in to add a comment!</a><br>
+      {% endif %}
+
+      {% if comments %}
+      <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong>
+      <hr>
+      <ul>
+        {% for comment in comments %}         
+        <div>
+            <span>
+              <strong class="text-info">{{ comment.author }} </strong>
+              <small class="text-muted">{{ comment.date_posted }}</small>
+            </span>
+            <p>
+              {{ comment.content|safe }}
+            </p>
+          </div>
+      
+        {% endfor %}
+      </ul>
+      {% else %}
+      <br>
+        <strong class="text-secondary">No comments yet...</strong>
+      <br>
+      {% endif %}
+
+    </div>
 
 </div>
 
